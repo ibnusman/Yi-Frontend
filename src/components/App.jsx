@@ -54,7 +54,7 @@ function App() {
     title={note.title}
     content={note.content}
     onDelete={deleteNote}
-    onUpdate={updateNote}  // Pass update function
+    onUpdate={updateNote}  
   />
       ))}
     </div>

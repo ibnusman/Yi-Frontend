@@ -10,7 +10,17 @@ function Note({ id, title, content, onDelete, onUpdate }) {
   }
 
   function handleSave() {
+    if (updatedTitle.trim() === "" || updatedContent.trim() === "") {
+      alert("Title and content cannot be empty!");
+      return;
+    }
     onUpdate(id, { title: updatedTitle, content: updatedContent });
+    setIsEditing(false);
+  }
+
+  function handleCancel() {
+    setUpdatedTitle(title);
+    setUpdatedContent(content);
     setIsEditing(false);
   }
 
@@ -27,14 +37,15 @@ function Note({ id, title, content, onDelete, onUpdate }) {
             value={updatedContent}
             onChange={(e) => setUpdatedContent(e.target.value)}
           />
-          <button onClick={handleSave}>Save</button>
+          <button onClick={handleSave}>✅ Save</button>
+          <button onClick={handleCancel}>❌ Cancel</button>
         </>
       ) : (
         <>
           <h1>{title}</h1>
           <p>{content}</p>
-          <button onClick={handleEdit}>Edit</button>
-          <button onClick={() => onDelete(id)}>Delete</button>
+          <button onClick={handleEdit}>✏️ Edit</button>
+          <button onClick={() => onDelete(id)}>🗑️ Delete</button>
         </>
       )}
     </div>
