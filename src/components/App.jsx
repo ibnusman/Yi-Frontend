@@ -24,6 +24,17 @@ function App() {
       .catch(error => console.error("Error adding note:", error));
   }
 
+  function updateNote(id, updatedNote) {
+  axios.put(`https://yi-backend-production.up.railway.app/api/notes/${id}`, updatedNote)
+    .then(response => {
+      setNotes(prevNotes =>
+        prevNotes.map(note => (note._id === id ? response.data : note))
+      );
+    })
+    .catch(error => console.error("Error updating note:", error));
+}
+
+
   function deleteNote(id) {
     axios.delete(`https://yi-backend-production.up.railway.app/api/notes/${id}`)
       .then(() => {
@@ -38,12 +49,13 @@ function App() {
       <CreateArea onAdd={addNote} />
       {notes.map((note) => (
         <Note
-          key={note._id}
-          id={note._id}
-          title={note.title}
-          content={note.content}
-          onDelete={deleteNote}
-        />
+    key={note._id}
+    id={note._id}
+    title={note.title}
+    content={note.content}
+    onDelete={deleteNote}
+    onUpdate={updateNote}  // Pass update function
+  />
       ))}
     </div>
   );
