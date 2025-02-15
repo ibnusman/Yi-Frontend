@@ -25,7 +25,7 @@ function App() {
   }
 
   function deleteNote(id) {
-    axios.delete(`https://yi-backend-production.up.railway.app/api/notes${id}`)
+    axios.delete(`https://yi-backend-production.up.railway.app/api/notes/${id}`)
       .then(() => {
         setNotes(prevNotes => prevNotes.filter(note => note._id !== id));
       })
