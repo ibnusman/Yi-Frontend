@@ -8,7 +8,7 @@ function App() {
   const [notes, setNotes] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5001/api/notes")
+    axios.get("https://yi-backend-production.up.railway.app/api/notes")
       .then(response => {
         console.log("Fetched Notes:", response.data); // Debugging
         setNotes(response.data);
@@ -17,7 +17,7 @@ function App() {
   }, []);
 
   function addNote(newNote) {
-    axios.post("http://localhost:5001/api/notes", newNote)
+    axios.post("https://yi-backend-production.up.railway.app/api/notes", newNote)
       .then(response => {
         setNotes(prevNotes => [...prevNotes, response.data]);  
       })
@@ -25,7 +25,7 @@ function App() {
   }
 
   function deleteNote(id) {
-    axios.delete(`http://localhost:5001/api/notes/${id}`)
+    axios.delete(`https://yi-backend-production.up.railway.app/api/notes${id}`)
       .then(() => {
         setNotes(prevNotes => prevNotes.filter(note => note._id !== id));
       })
